@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Олег Петрович — Портфолио</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        
+        #cursor-glow {
+            position: fixed; width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out; border-radius: 50%;
+        }
+
+        #tsparticles { position: fixed; width: 100%; height: 100%; z-index: -1; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .nav-glass { background: rgba(0,0,0,0.5); backdrop-filter: blur(15px); }
+        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+    <div id="cursor-glow"></div>
+    <div id="tsparticles"></div>
+
+    <nav class="nav-glass fixed w-full z-50 py-6 border-b border-white/5">
+        <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+            <span class="font-black text-xl tracking-tighter">Олег Петрович</span>
+            <div class="flex gap-6 text-sm">
+                <a href="#about" class="hover:text-white/50 transition">Обо мне</a>
+                <a href="#projects" class="hover:text-white/50 transition">Проекты</a>
+                <a href="#contacts" class="hover:text-white/50 transition">Контакты</a>
+                <a href="#reviews" class="hover:text-white/50 transition">Отзывы</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="about" class="pt-48 pb-20 px-6 text-center">
+        <h1 class="text-5xl md:text-6xl font-black mb-6">Цифровые интерфейсы<br><span class="text-white/30">нового уровня</span></h1>
+        <p class="text-white/50 text-lg max-w-2xl mx-auto">Создаю эстетичные сайты, телеграм ботов, программы и визуальные решения за небольшую плату. Опыт работы — 3 года.</p>
+    </section>
+
+    <section id="projects" class="py-20 px-6 max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+        <div class="glass-card p-10 rounded-3xl fade-up"><i data-lucide="award" class="mb-6 w-10 h-10"></i><h3 class="text-2xl font-bold mb-3">Опыт</h3><p class="text-white/50">Успешно реализую проекты, сочетая креатив и технику.</p></div>
+        <div class="glass-card p-10 rounded-3xl fade-up"><i data-lucide="bot" class="mb-6 w-10 h-10"></i><h3 class="text-2xl font-bold mb-3">Telegram Бот</h3><a href="https://t.me/OlegPetrovichbio_bot" class="text-indigo-400 underline">Перейти →</a></div>
+        <div class="glass-card p-10 rounded-3xl fade-up"><i data-lucide="shield-check" class="mb-6 w-10 h-10"></i><h3 class="text-2xl font-bold mb-3">Мне доверяют</h3><p class="text-white/50">Создавал сайты для популярных проектов. Стабильный результат.</p></div>
+    </section>
+
+    <section id="contacts" class="py-20 px-6 text-center">
+        <div class="max-w-2xl mx-auto glass-card p-12 rounded-3xl fade-up">
+            <h2 class="text-3xl font-bold mb-10">Связаться со мной</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <a href="https://t.me/Oleg_Petrovich_59" class="bg-white/5 p-4 rounded-2xl hover:bg-blue-900/30 transition">Telegram</a>
+                <a href="https://discord.com/users/da_ya_egorka" class="bg-white/5 p-4 rounded-2xl hover:bg-indigo-900/30 transition">Discord</a>
+                <a href="https://www.tiktok.com/@mikrovolnovka_ego" class="bg-white/5 p-4 rounded-2xl hover:bg-pink-900/30 transition">TikTok</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="py-20 px-6 max-w-4xl mx-auto">
+        <h2 class="text-3xl font-bold mb-12 text-center">Отзывы</h2>
+        <div id="reviews-grid" class="grid gap-4 mb-8 min-h-[200px]"></div>
+        <div class="flex justify-center items-center gap-6 mb-16">
+            <button onclick="changePage(-1)" class="p-2 bg-white/5 rounded-full hover:bg-white/10">←</button>
+            <span id="page-indicator">1 / 1</span>
+            <button onclick="changePage(1)" class="p-2 bg-white/5 rounded-full hover:bg-white/10">→</button>
+        </div>
+        <div class="glass-card p-8 rounded-3xl max-w-xl mx-auto text-center">
+            <input id="order-code" type="password" class="w-full bg-black rounded-xl p-3 mb-3 border border-white/10" placeholder="Код заказа">
+            <textarea id="review-text" class="w-full bg-black rounded-xl p-4 mb-4 border border-white/10" placeholder="Ваш отзыв..." rows="2"></textarea>
+            <button onclick="addReview()" class="bg-white text-black px-8 py-3 rounded-full font-bold">Отправить</button>
+        </div>
+    </section>
+
+    <footer class="py-10 text-center text-white/20 text-xs uppercase tracking-widest">Made by Oleg Petrovich</footer>
+
+    <script>
+        
+        tsParticles.load("tsparticles", { particles: { number: { value: 60 }, opacity: { value: 0.2 }, line_linked: { enable: true, opacity: 0.1 }, move: { enable: true, speed: 0.5 } } });
+        document.addEventListener('mousemove', (e) => { const g = document.getElementById('cursor-glow'); g.style.left = e.clientX + 'px'; g.style.top = e.clientY + 'px'; });
+
+        
+        let reviews = [{s:5, t:"Отличный разработчик!"}, {s:4, t:"Качественная работа."}];
+        let currentPage = 0;
+
+        function render() {
+            const grid = document.getElementById('reviews-grid');
+            grid.innerHTML = reviews.slice(currentPage*5, currentPage*5+5).map(r => `<div class="glass-card p-6 rounded-2xl flex justify-between"><span>${r.t}</span><span class="text-yellow-500">${'★'.repeat(r.s)}</span></div>`).join('');
+            document.getElementById('page-indicator').innerText = `${currentPage + 1} / ${Math.ceil(reviews.length/5) || 1}`;
+        }
+
+        window.addReview = () => {
+            if (document.getElementById('order-code').value !== "PRO-2026") return alert("Неверный код!");
+            reviews.unshift({s: 5, t: document.getElementById('review-text').value});
+            render();
+            document.getElementById('review-text').value = '';
+        };
+
+        window.changePage = (d) => { currentPage = Math.max(0, Math.min(Math.ceil(reviews.length/5)-1, currentPage + d)); render(); };
+        
+        const obs = new IntersectionObserver(e => e.forEach(i => i.isIntersecting && i.target.classList.add('visible')), {threshold: 0.1});
+        document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+        lucide.createIcons();
+        render();
+    </script>
+</body>
+</html>
